@@ -24,7 +24,6 @@ void doDataFetchAndDisplay(char location[], char unittype[])
 	CURLcode res;
 	string queryContent = "q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text = '" + string(location) + "') and u='" + string(unittype) + "'&format=xml";
 	char* qStr = const_cast<char*>(queryContent.c_str());
-	//cout << qStr << endl;
 	struct  curl_slist * headers = NULL;
 	tftInit();
 	iconMapInit();
@@ -40,7 +39,6 @@ void doDataFetchAndDisplay(char location[], char unittype[])
 		curl_easy_setopt(curl, CURLOPT_URL, "http://query.yahooapis.com/v1/public/yql");
 		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, qStr);
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, onDataFetched);
-		//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);
 		processer = "";
 		curl_easy_perform(curl);
 		curl_easy_cleanup(curl);
@@ -48,13 +46,11 @@ void doDataFetchAndDisplay(char location[], char unittype[])
 	int lastchr = processer.find("</query>") + 8;
 	processer.resize(lastchr + 1);
 	DisplayData(processer);
-	//cout << processer << endl;
 }
 
 size_t onDataFetched(char *ptr, size_t size, size_t nmemb, void *stream)
 {
 	processer += ptr;
-	//cout <<"    NLine::    "<< ptr << endl;
 	return size*nmemb;
 }
 
@@ -217,12 +213,12 @@ void DisplayData(string cont)
 	xmlXPathContextPtr xPathContext = xmlXPathNewContext(doc);
 	bool isIntl;
 	if (content.find("speed=\"mph\"")!=content.npos)isIntl = false; else isIntl = true;
-	//xmlXPathFreeContext(xPathContext);
 	
-	xmlChar **params1 = new xmlChar*[3];//= { {"code"}, {"temp"}, {"text"} };
-	xmlChar **params2 = new xmlChar*[2];// [2][10] = { "direction", "speed" };
-	xmlChar **params3 = new xmlChar*[1];// [1][5] = { "city" };
-	xmlChar **params4 = new xmlChar*[1];// [1][9] = { "humidity" };
+	xmlChar **params1 = new xmlChar*[3];
+	xmlChar **params2 = new xmlChar*[2];
+	xmlChar **params3 = new xmlChar*[1];
+	xmlChar **params4 = new xmlChar*[1];
+
 	params1[0] = new xmlChar[4]; params1[0] = (xmlChar*)"code";
 	params1[1] = new xmlChar[4]; params1[1] = (xmlChar*)"temp";
 	params1[2] = new xmlChar[4]; params1[2] = (xmlChar*)"text";
@@ -244,9 +240,6 @@ void DisplayData(string cont)
 	
 	xmlXPathFreeContext(xPathContext);
 	tftDisplay(loca[0], wind[0], wind[1], cond[1], cond[2], cond[0], humd[0], isIntl);
-	/*
-	cout << "loc:" << loca[0] << " wind:" << wind[0] <<
-		" " << wind[1] << " cond:" << cond[1] << " " << cond[2] << " " << cond[0] << " hum:" << humd[0] << endl;*/
 }
 
 string* getPropByXPath(xmlChar *xPath, xmlXPathContextPtr xPathContext, xmlChar **params, int count)
@@ -254,7 +247,6 @@ string* getPropByXPath(xmlChar *xPath, xmlXPathContextPtr xPathContext, xmlChar 
 	
 	string *ret = new string[count];
 	xmlXPathObjectPtr xPathResult;
-	//xmlXPathContextPtr xPathContext = xPathContext;
 	xPathResult = xmlXPathEvalExpression(xPath, xPathContext);
 	if (xPathResult)
 	{
@@ -309,7 +301,7 @@ void tftWriteImage(string filename)
 {
 	PngProc img;
 	img.pngInit(filename);
-	//cout << "img init complete" << endl;
+
 	unsigned int **pBitMap = img.get565BitMap();
 	int w, h = 0;
 	w = img.getPNGInfo()->width;
@@ -318,7 +310,6 @@ void tftWriteImage(string filename)
 	{
 		for (int x = 0; x < w; x++)
 		{
-			//cout << "{" << x+46 << "," << y+20 <<","<<pBitMap[y][x]<< "}" << endl;
 			tft.drawPixel(x + 46, y + 20, pBitMap[y][x]);
 		}
 	}
@@ -344,6 +335,9 @@ void tftInit()
 	tManager.refresh();
 }
 
+/// <summary>
+/// initializes icon file map
+/// </summary>
 void iconMapInit()
 {
 	iconMap.insert(pair<int, string>(tornado, "Resources/tornado.png"));
@@ -397,23 +391,25 @@ void iconMapInit()
 	iconMap.insert(pair<int, string>(not_available, "./Resources/unknown.png"));
 }
 
+/// <summary>
+/// Initialize PNG file
+/// </summary>
+/// <param name="filename">PNG file name</summary>
+/// <returns>if the initialize succeed.</returns>
 int PngProc::pngInit(char *filename)
 {
 	this->m_pngFile = fopen(filename, "rb");
-	//cout << filename << endl;
 	if (this->m_pngFile == NULL)
 	{
 		fclose(this->m_pngFile);
 		return PNG_FILE_OPEN_ERR;
 	}
-	//cout << "file opened." << endl;
 	this->m_pngData = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
 	if (this->m_pngData == NULL)
 	{
 		fclose(this->m_pngFile);
 		return PNG_STRUCT_CREATE_ERR;
 	}
-	//cout << "struct created." << endl;
 	this->m_pngInfo = png_create_info_struct(this->m_pngData);
 	if (this->m_pngInfo == NULL)
 	{
@@ -421,22 +417,18 @@ int PngProc::pngInit(char *filename)
 		png_destroy_read_struct(&(this->m_pngData), NULL, NULL);
 		return PNG_GET_INFO_ERR;
 	}
-	//cout << "info gathered." << endl;
 	if (setjmp(png_jmpbuf(this->m_pngData)))
 	{
 		fclose(this->m_pngFile);
 		png_destroy_read_struct(&(this->m_pngData), &(this->m_pngInfo), NULL);
 	}
-	//cout << "data dumped" << endl;
 	png_init_io(this->m_pngData, this->m_pngFile);
 	png_read_png(this->m_pngData, this->m_pngInfo, PNG_TRANSFORM_IDENTITY, 0);
 	png_get_IHDR(this->m_pngData, this->m_pngInfo, &this->m_width, &this->m_height, &this->m_bitDepth, &(this->m_color_type), NULL, NULL, NULL);
 
 	png_bytep* row_pointers = png_get_rows(this->m_pngData, this->m_pngInfo);
 
-	//cout << "executed data read. LIBPNG INIT OVER." << endl;
 	unsigned int bufSize = 0;
-	//cout << m_pngInfo->width << " " << m_pngInfo->height << endl;
 
 	const int w = m_pngInfo->width;
 	const int h = m_pngInfo->height;
@@ -452,11 +444,9 @@ int PngProc::pngInit(char *filename)
 	{
 		for (int y0 = 0; y0 < this->m_height; y0++)
 		{
-			//cout << "in 1st loop!" << endl;
 			int x = 0;
 			for (int x0 = 0; x0 < this->m_width * 4; x0 += 4)
 			{
-				//cout << "in 2nd loop!" << endl;
 				unsigned char R, G, B = 0;
 				unsigned char a, r, g, b;
 				r = row_pointers[y0][x0];
@@ -474,35 +464,18 @@ int PngProc::pngInit(char *filename)
 				Gx = g * g / 256;
 				Bx = b * a / 256;
 				if (a <= 32) { Rx = 0; Gx = 0; Bx = 0; }
-				//cout << "{" << Rx << "," << Gx << "," << Bx << "}";
 				this->m_color565BitMap[y0][x] = Color565(Rx, Gx, Bx);
-				/*
-				//cout << "{" << a << "," << r << "," << g << "," << b << "}";
-				//cout << "{" << A << "," << R << "," << G << "," << B << "}" << endl;
-				cout << sizeof(&row_pointers[y0][x0]) << endl;
-				if (r == g == b == 255 && a == 0)
-				{
-					this->m_color565BitMap[y0][x] = 0;
-					cout << "{" << a << "," << r << "," << g << "," << b << "}";
-				}
-				else
-				{
-					this->m_color565BitMap[y0][x] = a / 255 * Color565(r, g, b);
-				}*/
-				//cout << this->m_color565BitMap[y0][x] << " " << "{" << a << "," << r << "," << g << "," << b << "}" << endl;
+
 				RGBColor tmpRgb = { R,G,B };
 				this->m_colorRgbBitMap[y0][x] = tmpRgb;
 				x++;
 			}
-			//cout << endl;
 		}
 	}
 	else
 	{
 		return PNG_INVALID_FILE_FORMAT;
 	}
-	//png_destroy_read_struct(&m_pngData, &m_pngInfo, NULL);
-	//fclose(this->m_pngFile);
 	return PNG_INIT_SUCCESS;
 }
 

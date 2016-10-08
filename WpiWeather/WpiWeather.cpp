@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
 	using namespace cmdline;
 	parser argParser;
 	argParser.add<string>("location", 'l', "The location of weather report", false, "Albuquerque");
-	argParser.add<string>("format", 'f', "the data format of report", false, "c", oneof<string>("c", "f"));
+	argParser.add<string>("format", 'f', "the data format of report, SI(International standard units) or Imperial units ", false, "c", oneof<string>("c", "f"));
 	argParser.parse_check(argc, argv);
 	string loc = argParser.get<string>("location");
 	string fmt = argParser.get<string>("format");
@@ -357,8 +357,8 @@ void iconMapInit()
 	iconMap.insert(pair<int, string>(freezing_drizzle, "./Resources/ice.png"));
 	iconMap.insert(pair<int, string>(drizzle, "./Resources/drizzle.png"));
 	iconMap.insert(pair<int, string>(freezing_rain, "./Resources/ice.png"));
-	iconMap.insert(pair<int, string>(showers, "./Resources/cloudRain.png"));
-	iconMap.insert(pair<int, string>(showers, "./Resources/cloudrain.png"));
+	iconMap.insert(pair<int, string>(showers, "./Resources/drizzle.png"));
+	iconMap.insert(pair<int, string>(12, "./Resources/drizzle.png"));
 	iconMap.insert(pair<int, string>(snow_flurries, "./Resources/flurries.png"));
 	iconMap.insert(pair<int, string>(light_snow_showers, "./Resources/lightsnow.png"));
 	iconMap.insert(pair<int, string>(blowing_snow, "./Resources/snow.png"));

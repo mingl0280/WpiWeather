@@ -6,15 +6,15 @@ BINARYDIR := Release
 
 #Additional flags
 PREPROCESSOR_MACROS := NDEBUG=1 RELEASE=1
-INCLUDE_DIRS := 
-LIBRARY_DIRS := ../../libs/local/lib
-LIBRARY_NAMES := wiringPi tft_st7735 libssl zlib
+INCLUDE_DIRS := E:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/include/libxml2
+LIBRARY_DIRS := 
+LIBRARY_NAMES := wiringPi tft_st7735 curl xml2 ssl png
 ADDITIONAL_LINKER_INPUTS := 
 MACOS_FRAMEWORKS := 
 LINUX_PACKAGES := 
 
-CFLAGS := -ggdb -ffunction-sections -O2
-CXXFLAGS := -ggdb -ffunction-sections -fno-exceptions -fno-rtti -O2
+CFLAGS := -ggdb -ffunction-sections -O3
+CXXFLAGS := -ggdb -ffunction-sections -fexceptions -O3
 ASFLAGS := 
 LDFLAGS := -Wl,-gc-sections
 COMMONFLAGS := 

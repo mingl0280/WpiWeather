@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="cmdline::detail::lexical_cast_t&lt;Target, Source, Same&gt;">
+    <Position X="0.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>cmdline.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="cmdline::detail::lexical_cast_t&lt;Target, Source, true&gt;">
+    <Position X="2.5" Y="2" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>cmdline.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="cmdline::detail::lexical_cast_t&lt;std::string, Source, false&gt;">
+    <Position X="11.75" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>cmdline.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="cmdline::cmdline_error">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAQAAAAAAAQAAAAIAAA=</HashCode>
+      <FileName>cmdline.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="cmdline::parser">
+    <Position X="2.5" Y="3.25" Width="3" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="cmdline::parser::option_base">
+        <TypeIdentifier>
+          <NewMemberFileName>cmdline.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="cmdline::parser::option_without_value">
+        <TypeIdentifier>
+          <NewMemberFileName>cmdline.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="cmdline::parser::option_with_value&lt;T&gt;">
+        <TypeIdentifier>
+          <NewMemberFileName>cmdline.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="cmdline::parser::option_with_value_with_reader&lt;T, F&gt;">
+        <TypeIdentifier>
+          <NewMemberFileName>cmdline.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AEACAAQAAAAICAAAAAUAYgAgAQAAEAAAAQEAABQCIAA=</HashCode>
+      <FileName>cmdline.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PngProc">
+    <Position X="6" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AxARAAiEwAAQQAABAAAAAAAAAAAAAACAAAAAAAAAAEA=</HashCode>
+      <FileName>WpiWeather.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="cmdline::detail::is_same&lt;T1, T2&gt;">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>cmdline.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="cmdline::detail::is_same&lt;T, T&gt;">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>cmdline.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="cmdline::default_reader&lt;T&gt;">
+    <Position X="0.5" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>cmdline.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="cmdline::range_reader&lt;T&gt;">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAEAAACAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>cmdline.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="cmdline::oneof_reader&lt;T&gt;">
+    <Position X="0.5" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAACCAAA=</HashCode>
+      <FileName>cmdline.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="RGBColor">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAEAAQA=</HashCode>
+      <FileName>WpiWeather.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="xPathSet">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>WpiWeather.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="conditions">
+    <Position X="6" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>wAEQkEjIAAAASCC8QBEAgIIAEMAgBQACIKAEAAAAgEg=</HashCode>
+      <FileName>WpiWeather.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

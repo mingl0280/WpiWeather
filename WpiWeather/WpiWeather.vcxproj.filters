@@ -56,6 +56,7 @@
     <None Include="mcu.mak">
       <Filter>Source files\Device-specific files</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="MCU.xml">

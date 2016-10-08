@@ -66,6 +66,7 @@
     <ClCompile Include="WpiWeather.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="debug.mak" />
     <None Include="Makefile" />
     <None Include="mcu.mak" />

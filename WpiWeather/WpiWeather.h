@@ -28,8 +28,6 @@
 
 using namespace std;
 
-
-
 enum conditions
 {
 	tornado = 0,

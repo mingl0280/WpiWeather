@@ -27,6 +27,12 @@
     <Filter Include="Header files\Device-specific files">
       <UniqueIdentifier>{7c4ff7ee-d5f7-4d6b-95eb-93f87d63128f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source files\Resources">
+      <UniqueIdentifier>{122a6cbc-4550-415a-b9fb-fe16be034168}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Resources">
+      <UniqueIdentifier>{2e1a2213-e19c-4941-b06d-7706b9341546}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WpiWeather.cpp">
@@ -55,5 +61,63 @@
     <Xml Include="MCU.xml">
       <Filter>VisualGDB settings</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WpiWeather.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="cmdline.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\clearNight.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\cloudRain.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\clouds.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\flurries.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\fog.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\hail.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\ice.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\lightning.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\rain.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\snow.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\snowrain.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\sun.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\suncloud.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\sunhaze.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\sunrain.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
+    <Image Include="Resources\wind.png">
+      <Filter>Source files\Resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

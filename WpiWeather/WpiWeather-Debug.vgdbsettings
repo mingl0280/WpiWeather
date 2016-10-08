@@ -4,7 +4,9 @@
   <Project xsi:type="com.visualgdb.project.embedded">
     <CustomSourceDirectories>
       <Directories />
-      <PathStyle>MinGWUnixSlash</PathStyle>
+      <PathStyle>RemoteUnix</PathStyle>
+      <LocalDirForAbsolutePaths />
+      <LocalDirForRelativePaths />
     </CustomSourceDirectories>
     <MainSourceDirectory>$(ProjectDir)</MainSourceDirectory>
     <EmbeddedProfileFile>MCU.xml</EmbeddedProfileFile>
@@ -12,6 +14,7 @@
   <Build xsi:type="com.visualgdb.build.embedded">
     <MakeFilePathRelativeToSourceDir>Makefile</MakeFilePathRelativeToSourceDir>
     <MakeConfigurationName>Debug</MakeConfigurationName>
+    <AdditionalMakeArguments />
     <MakeCommandTemplate>
       <SkipWhenRunningCommandList>false</SkipWhenRunningCommandList>
       <Command>cmd.exe</Command>
@@ -92,8 +95,12 @@
     <ShowMessageAfterExecuting>true</ShowMessageAfterExecuting>
   </CustomShortcuts>
   <UserDefinedVariables />
+  <ImportedPropertySheets />
   <CodeSense>
-    <Enabled>Unknown</Enabled>
+    <Enabled>False</Enabled>
+    <CFLAGS />
+    <CXXFLAGS />
+    <ExternalSourceFileList />
     <ExtraSettings>
       <HideErrorsInSystemHeaders>true</HideErrorsInSystemHeaders>
     </ExtraSettings>

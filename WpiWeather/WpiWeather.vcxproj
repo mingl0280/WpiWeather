@@ -37,9 +37,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeIncludeSearchPath>e:\sysgcc\raspberry\arm-linux-gnueabihf\include\c++\4.9;e:\sysgcc\raspberry\arm-linux-gnueabihf\include\c++\4.9\backward;e:\sysgcc\raspberry\lib\gcc\arm-linux-gnueabihf\4.9\include;e:\sysgcc\raspberry\lib\gcc\arm-linux-gnueabihf\4.9\include-fixed;e:\sysgcc\raspberry\arm-linux-gnueabihf\include;e:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include\arm-linux-gnueabihf;e:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <NMakeIncludeSearchPath>E:\SysGCC\Raspberry\arm-linux-gnueabihf\sysroot\usr\include\libxml2;e:\sysgcc\raspberry\arm-linux-gnueabihf\include\c++\4.9;e:\sysgcc\raspberry\arm-linux-gnueabihf\include\c++\4.9\backward;e:\sysgcc\raspberry\lib\gcc\arm-linux-gnueabihf\4.9\include;e:\sysgcc\raspberry\lib\gcc\arm-linux-gnueabihf\4.9\include-fixed;e:\sysgcc\raspberry\arm-linux-gnueabihf\include;e:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include\arm-linux-gnueabihf;e:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
     <NMakeForcedIncludes>$(ProjectDir)\gcc_Debug.h;$(VISUALGDB_DIR)\gcc_compat.h;$(NMakeForcedIncludes)</NMakeForcedIncludes>
-    <NMakePreprocessorDefinitions>__VisualGDB_CFG_Debug;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <NMakeBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /build "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeBuildCommandLine>
     <NMakeCleanCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /clean "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeCleanCommandLine>
     <NMakeReBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /rebuild "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeReBuildCommandLine>
@@ -47,6 +46,7 @@
     <IncludePath />
     <ReferencePath />
     <LibraryPath />
+    <NMakePreprocessorDefinitions>__VisualGDB_CFG_Debug;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <NMakeIncludeSearchPath>e:\sysgcc\raspberry\arm-linux-gnueabihf\include\c++\4.9;e:\sysgcc\raspberry\arm-linux-gnueabihf\include\c++\4.9\backward;e:\sysgcc\raspberry\lib\gcc\arm-linux-gnueabihf\4.9\include;e:\sysgcc\raspberry\lib\gcc\arm-linux-gnueabihf\4.9\include-fixed;e:\sysgcc\raspberry\arm-linux-gnueabihf\include;e:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include\arm-linux-gnueabihf;e:\sysgcc\raspberry\arm-linux-gnueabihf\sysroot\usr\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
@@ -75,6 +75,60 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="MCU.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cmdline.h" />
+    <ClInclude Include="WpiWeather.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\clearNight.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\cloudRain.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\clouds.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\flurries.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\fog.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\hail.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\ice.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\lightning.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\rain.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\snow.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\snowrain.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\sun.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\suncloud.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\sunhaze.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\sunrain.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Resources\wind.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

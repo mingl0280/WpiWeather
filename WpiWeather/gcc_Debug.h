@@ -188,6 +188,9 @@
 #ifndef __DEC32_EPSILON__
 #define __DEC32_EPSILON__ 1E-6DF
 #endif
+#ifndef __OPTIMIZE__
+#define __OPTIMIZE__ 1
+#endif
 #ifndef __CHAR_UNSIGNED__
 #define __CHAR_UNSIGNED__ 1
 #endif
@@ -303,7 +306,7 @@
 #define __STDC_IEC_559__ 1
 #endif
 #ifndef __STDC_ISO_10646__
-#define __STDC_ISO_10646__ 201103L
+#define __STDC_ISO_10646__ 201505L
 #endif
 #ifndef __DECIMAL_DIG__
 #define __DECIMAL_DIG__ 17
@@ -334,6 +337,9 @@
 #endif
 #ifndef __ULLACCUM_MAX__
 #define __ULLACCUM_MAX__ 0XFFFFFFFFFFFFFFFFP-32ULLK
+#endif
+#ifndef __GXX_RTTI
+#define __GXX_RTTI 1
 #endif
 #ifndef __HQ_IBIT__
 #define __HQ_IBIT__ 0
@@ -519,9 +525,6 @@
 #ifndef __UHA_FBIT__
 #define __UHA_FBIT__ 8
 #endif
-#ifndef __NO_INLINE__
-#define __NO_INLINE__ 1
-#endif
 #ifndef __SFRACT_MIN__
 #define __SFRACT_MIN__ (-0.5HR-0.5HR)
 #endif
@@ -605,6 +608,9 @@
 #endif
 #ifndef __UDQ_FBIT__
 #define __UDQ_FBIT__ 64
+#endif
+#ifndef DEBUG
+#define DEBUG 1
 #endif
 #ifndef __INT8_TYPE__
 #define __INT8_TYPE__ signed char
@@ -755,6 +761,9 @@
 #endif
 #ifndef __UTA_IBIT__
 #define __UTA_IBIT__ 64
+#endif
+#ifndef __EXCEPTIONS
+#define __EXCEPTIONS 1
 #endif
 #ifndef __LDBL_MANT_DIG__
 #define __LDBL_MANT_DIG__ 53
@@ -1074,12 +1083,10 @@
 #ifndef __ATOMIC_RELEASE
 #define __ATOMIC_RELEASE 3
 #endif
-#ifndef DEBUG
-#define DEBUG 1
-#endif
 #endif
 
 // --- Include directories begin --- //
+//E:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/include/libxml2
 //e:\sysgcc\raspberry\bin\../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/include/c++/4.9
 //e:\sysgcc\raspberry\bin\../lib/gcc/arm-linux-gnueabihf/4.9/../../../../arm-linux-gnueabihf/include/c++/4.9/backward
 //e:\sysgcc\raspberry\bin\../lib/gcc/arm-linux-gnueabihf/4.9/include

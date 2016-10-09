@@ -41,9 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
-    <None Include="debug.mak">
-      <Filter>Make files</Filter>
-    </None>
     <None Include="WpiWeather-Debug.vgdbsettings">
       <Filter>VisualGDB settings</Filter>
     </None>
@@ -57,6 +54,9 @@
       <Filter>Source files\Device-specific files</Filter>
     </None>
     <None Include="ClassDiagram.cd" />
+    <None Include="debug.mak">
+      <Filter>Make files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="MCU.xml">

@@ -14,6 +14,7 @@ int main(int argc, char* argv[])
 	string fmt = argParser.get<string>("format");
 	char *l = const_cast<char*>(loc.c_str());
 	char *u = const_cast<char*>(fmt.c_str());
+	InpLocation = loc;
 	doDataFetchAndDisplay(l, u);
 	return 0;
 }
@@ -25,8 +26,6 @@ void doDataFetchAndDisplay(char location[], char unittype[])
 	string queryContent = "q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text = '" + string(location) + "') and u='" + string(unittype) + "'&format=xml";
 	char* qStr = const_cast<char*>(queryContent.c_str());
 	struct  curl_slist * headers = NULL;
-	tftInit();
-	iconMapInit();
 	headers = curl_slist_append(headers, "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:49.0) Gecko/20100101 Firefox/49.0");
 	headers = curl_slist_append(headers, "Content-Type: application/x-www-form-urlencoded");
 	headers = curl_slist_append(headers, "Accept: */*");
@@ -203,6 +202,13 @@ void DisplayData(string cont)
 {
 	string content;
 	content = replace_all_distinct(cont, "yweather:", "");
+	if (content.length() <= 200)
+	{
+		cerr << "Undefined Location!" << endl;
+		return;
+	}
+	tftInit();
+	iconMapInit();
 	char *ptr = const_cast<char*>(content.c_str());
 	xmlChar xPath0[] = "/query/results/channel/item/condition";
 	xmlChar xPath1[] = "/query/results/channel/wind";
@@ -294,6 +300,8 @@ void tftDisplay(string location, string wind_dir, string wind_vel, string temp, 
 	(*(tFields["Line1"])).setValue(const_cast<char*>(l1str.c_str()));
 	(*(tFields["Line2"])).setValue(const_cast<char*>(l2str.c_str()));
 	tManager.refresh();
+	cout << InpLocation << "天气：" << weather << "，温度：" << temp << ((is_intl_unit) ? "℃" : "℉") << "，湿度：" << humd << "%" << endl
+		<< "风向：" << wind_dir << "，风速：" << ((is_intl_unit) ? msstr + string("米每秒") : wind_vel + "英里每小时" )<<endl;
 	tftWriteImage(img);
 }
 
@@ -334,6 +342,31 @@ void tftInit()
 	(*(tFields["Line2"])).setValue("Init test text 2...");
 	tManager.refresh();
 }
+/*
+void  do_shortInit(unsigned char _channel, unsigned char _rs, unsigned char _rst, int _speed)
+{
+	pinMode(_rs, OUTPUT);
+
+	// 0 is SPI0_CE0_N which is GPIO8 (first chip select line) => Channel 0
+	if (wiringPiSPISetup(_channel, _speed) < 0)
+	{
+		// Handle error
+		printf("TFT_ST7735::commonInit Error setting up SPI\n");
+	}
+
+	// toggle RST low to reset; CS low so it'll listen to us
+	if (_rst)
+	{
+		pinMode(_rst, OUTPUT);
+		digitalWrite(_rst, HIGH);
+		delay(100);
+		digitalWrite(_rst, LOW);
+		delay(100);
+		digitalWrite(_rst, HIGH);
+		delay(100);
+	}
+}*/
+
 
 /// <summary>
 /// initializes icon file map

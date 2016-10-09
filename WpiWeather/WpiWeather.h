@@ -117,6 +117,8 @@ public:
 	png_infop getPNGInfo();
 }pngfile;
 
+
+
 size_t onDataFetched(char *ptr, size_t size, size_t nmemb, void *stream);
 void DisplayData(string content);
 void tftDisplay(string location, string wind_dir, string wind_vel, string temp, string weather, string weatherID, string humd, bool is_intl_unit);
@@ -130,6 +132,8 @@ map<string, string> *GetXMLValuesByXPath(xmlXPathContextPtr xPathContext, xPathS
 void setAllXPaths(xPathSet &item, xmlChar* stmt, list<string> lst);
 string* getPropByXPath(xmlChar *xPath, xmlXPathContextPtr xPathContext, xmlChar **params, int count);
 string* getPropByXPath(xmlXPathObjectPtr xPathResult, xmlChar **params, int count);
+//void do_shortInit(unsigned char, unsigned char, unsigned char, int);
+string InpLocation = "";
 
 TFT_ST7735 tft = *new TFT_ST7735(0, 24, 25, 32000000);
 TFT_manager tManager = *new TFT_manager();

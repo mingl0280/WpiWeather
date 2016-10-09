@@ -1,9 +1,10 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WpiWeather", "WpiWeather\WpiWeather.vcxproj", "{6DFA8BD4-01A6-4462-833A-D247CDD04BE6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "screenRstTest", "screenRstTest\screenRstTest.vcxproj", "{6C342719-19A5-4DCA-8DC0-A1413725C62D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +18,12 @@ Global
 		{6DFA8BD4-01A6-4462-833A-D247CDD04BE6}.Release|x64.ActiveCfg = Release|Win32
 		{6DFA8BD4-01A6-4462-833A-D247CDD04BE6}.Release|x86.ActiveCfg = Release|Win32
 		{6DFA8BD4-01A6-4462-833A-D247CDD04BE6}.Release|x86.Build.0 = Release|Win32
+		{6C342719-19A5-4DCA-8DC0-A1413725C62D}.Debug|x64.ActiveCfg = Debug|Win32
+		{6C342719-19A5-4DCA-8DC0-A1413725C62D}.Debug|x86.ActiveCfg = Debug|Win32
+		{6C342719-19A5-4DCA-8DC0-A1413725C62D}.Debug|x86.Build.0 = Debug|Win32
+		{6C342719-19A5-4DCA-8DC0-A1413725C62D}.Release|x64.ActiveCfg = Release|Win32
+		{6C342719-19A5-4DCA-8DC0-A1413725C62D}.Release|x86.ActiveCfg = Release|Win32
+		{6C342719-19A5-4DCA-8DC0-A1413725C62D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

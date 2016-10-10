@@ -318,7 +318,7 @@ void tftWriteImage(string filename)
 	{
 		for (int x = 0; x < w; x++)
 		{
-			tft.drawPixel(x + 46, y + 20, pBitMap[y][x]);
+			tft.drawPixel(x + 46, y + 30, pBitMap[y][x]);
 		}
 	}
 }
@@ -326,8 +326,8 @@ void tftWriteImage(string filename)
 void tftInit()
 {
 	tFields.insert(pair<string, TFT_field*>("Title", new TFT_field(tft, 5, 1, 118, 16, Color565(255, 255, 255), 1, TFT_BLACK, false)));
-	tFields.insert(pair<string, TFT_field*>("Line1", new TFT_field(tft, 5, 58, 118, 16, Color565(255, 255, 255), 1, TFT_BLACK, false)));
-	tFields.insert(pair<string, TFT_field*>("Line2", new TFT_field(tft, 5, 81, 118, 16, Color565(255, 255, 255), 1, TFT_BLACK, false)));
+	tFields.insert(pair<string, TFT_field*>("Line1", new TFT_field(tft, 5, 68, 118, 16, Color565(255, 255, 255), 1, TFT_BLACK, false)));
+	tFields.insert(pair<string, TFT_field*>("Line2", new TFT_field(tft, 5, 96, 118, 16, Color565(255, 255, 255), 1, TFT_BLACK, false)));
 	tManager.add(tFields["Title"]);
 	tManager.add(tFields["Line1"]);
 	tManager.add(tFields["Line2"]);
@@ -413,6 +413,7 @@ void iconMapInit()
 	iconMap.insert(pair<int, string>(isolated_thunderstorms, "./Resources/thunderstorm.png"));
 	iconMap.insert(pair<int, string>(scattered_thunderstorms, "./Resources/thunderstorm.png"));
 	iconMap.insert(pair<int, string>(scattered_thunderstorms, "./Resources/thunderstorm.png"));
+	iconMap.insert(pair<int, string>(scattered_showers_, "./Resources/drizzle.png"));
 	iconMap.insert(pair<int, string>(scattered_showers, "./Resources/rain.png"));
 	iconMap.insert(pair<int, string>(heavy_snow, "./Resources/snow.png"));
 	iconMap.insert(pair<int, string>(scattered_snow_showers, "./Resources/snow.png"));

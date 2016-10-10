@@ -1,4 +1,8 @@
 #pragma once
+#ifndef _WPIWEATHER_H
+#define _WPIWEATHER_H
+
+
 #include <iostream>
 #include <cstdlib>
 #include <algorithm>
@@ -6,11 +10,11 @@
 #include <curl/curl.h>
 #include <ctime>
 #include <cmath>
-#include <libxml2/libxml/parser.h>
-#include <libxml2/libxml/tree.h>
-#include <libxml2/libxml/xpath.h>
-#include <libxml2/libxml/xmlmemory.h>
-#include <libxml2/libxml/xmlstring.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+#include <libxml/xpath.h>
+#include <libxml/xmlmemory.h>
+#include <libxml/xmlstring.h>
 #include <libxml/xpathInternals.h>
 #include <tft_st7735.h>
 #include <tft_manager.h>
@@ -68,6 +72,7 @@ enum conditions
 	hot = 36,
 	isolated_thunderstorms = 37,
 	scattered_thunderstorms = 38,
+	scattered_showers_ = 39,
 	scattered_showers = 40,
 	heavy_snow = 41,
 	scattered_snow_showers = 42,
@@ -142,3 +147,5 @@ map<string, TFT_field*> tFields;
 map<int, string> iconMap;
 
 string processer = "";
+
+#endif // !_WPIWEATHER_H

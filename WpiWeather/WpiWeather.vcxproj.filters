@@ -38,6 +38,9 @@
     <ClCompile Include="WpiWeather.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="dht11.cpp">
+      <Filter>Header files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
@@ -68,6 +71,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="cmdline.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="dht11.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

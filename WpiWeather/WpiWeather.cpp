@@ -9,13 +9,67 @@ int main(int argc, char* argv[])
 	parser argParser;
 	argParser.add<string>("location", 'l', "The location of weather report", false, "Albuquerque");
 	argParser.add<string>("format", 'f', "the data format of report, SI(International standard units) or Imperial units ", false, "c", oneof<string>("c", "f"));
+	argParser.add<int>("interval", 'i', "if you specified extra locations, you can provide an interval of how long should they be updated.", false, 30);
+	argParser.footer("other locations ...");
 	argParser.parse_check(argc, argv);
 	string loc = argParser.get<string>("location");
 	string fmt = argParser.get<string>("format");
+	int interval = argParser.get<int>("interval");
 	char *l = const_cast<char*>(loc.c_str());
 	char *u = const_cast<char*>(fmt.c_str());
 	InpLocation = loc;
-	doDataFetchAndDisplay(l, u);
+	wiringPiSetupGpio();
+	tftInit();
+	iconMapInit();
+	DHT11.startThread();
+	//DHT11.forceRefresh();
+	cout << argParser.rest().empty() << endl;
+	if (argParser.rest().empty())
+	{
+		if (argParser.exist("interval"))
+		{
+			while (true)
+			{
+				doDataFetchAndDisplay(l, u);
+				sleep(interval);
+			}
+		}
+		else
+		{
+			doDataFetchAndDisplay(l, u);
+		}
+	}
+	else
+	{
+		if (argParser.exist("interval"))
+		{
+			int maxLocs = argParser.rest().size() + 1;
+			string *locations = new string[maxLocs];
+			locations[0] = loc;
+			for (int i = 0; i < argParser.rest().size(); i++)
+			{
+				locations[i + 1] = argParser.rest()[i];
+			}
+			while (true)
+			{
+				for (int j = 0; j < maxLocs; j++)
+				{
+					
+						doDataFetchAndDisplay(const_cast<char*>(locations[j].c_str()), u);
+						sleep(interval);
+					
+				}
+			}
+		}
+		else
+		{
+			doDataFetchAndDisplay(l, u);
+			for (int i = 0; i < argParser.rest().size(); i++)
+			{
+				doDataFetchAndDisplay(const_cast<char*>(argParser.rest()[i].c_str()) , u);
+			}
+		}
+	}
 	return 0;
 }
 
@@ -207,8 +261,6 @@ void DisplayData(string cont)
 		cerr << "Undefined Location!" << endl;
 		return;
 	}
-	tftInit();
-	iconMapInit();
 	char *ptr = const_cast<char*>(content.c_str());
 	xmlChar xPath0[] = "/query/results/channel/item/condition";
 	xmlChar xPath1[] = "/query/results/channel/wind";
@@ -290,18 +342,48 @@ string* getPropByXPath(xmlChar *xPath, xmlXPathContextPtr xPathContext, xmlChar 
 /// <param name="weatherID">Weather ID</param>
 void tftDisplay(string location, string wind_dir, string wind_vel, string temp, string weather, string weatherID, string humd, bool is_intl_unit)
 {
+	tft.clearScreen();
+
 	string img = iconMap[atoi(weatherID.c_str())];
 	string locationstr = location + " Weather";
 	string l1str = temp + ((is_intl_unit)?" C":" F")+", " + weather + ", " + humd + "%";
+	int dht11Temp, dht11Wet;
+	string dht11OptStr = "";
+	try
+	{
+		dht11Temp = DHT11.getTemp();
+		dht11Wet = DHT11.getWetness();
+		char dht11TempStr[5];
+		char dht11WetStr[5];
+		sprintf(dht11TempStr, "%d", dht11Temp);
+		sprintf(dht11WetStr, "%d", dht11Wet);
+		dht11OptStr = "Current:";
+		dht11OptStr += dht11TempStr;
+		dht11OptStr += " C, ";
+		dht11OptStr += dht11WetStr;
+		dht11OptStr += "%";
+	}
+	catch (const std::exception& ex)
+	{
+		dht11OptStr = ex.what();
+	}
+	
 	char msstr[6];
 	sprintf(msstr, "%2.2f", atof(const_cast<char*>(wind_vel.c_str())) / 3.6);
 	string l2str = "Wind:" + wind_dir + " "  + ((is_intl_unit)? msstr + (string(" m/s")): wind_vel + " mph");
+	(*(tFields["Title"])).setValue("                     ");
+	(*(tFields["Line1"])).setValue("                     ");
+	(*(tFields["Line2"])).setValue("                     ");
+	(*(tFields["DHTData"])).setValue("                   ");
+	tManager.refresh();
 	(*(tFields["Title"])).setValue(const_cast<char*>(locationstr.c_str()));
 	(*(tFields["Line1"])).setValue(const_cast<char*>(l1str.c_str()));
 	(*(tFields["Line2"])).setValue(const_cast<char*>(l2str.c_str()));
+	(*(tFields["DHTData"])).setValue(const_cast<char*>(dht11OptStr.c_str()));
 	tManager.refresh();
-	cout << InpLocation << "天气：" << weather << "，温度：" << temp << ((is_intl_unit) ? "℃" : "℉") << "，湿度：" << humd << "%" << endl
-		<< "风向：" << wind_dir << "，风速：" << ((is_intl_unit) ? msstr + string("米每秒") : wind_vel + "英里每小时" )<<endl;
+	cout << location << "天气：" << weather << "，温度：" << temp << ((is_intl_unit) ? "℃" : "℉") << "，湿度：" << humd << "%" << endl
+		<< "风向：" << wind_dir << "，风速：" << ((is_intl_unit) ? msstr + string("米每秒") : wind_vel + "英里每小时") << endl;
+	cout << "当前地点状况：" << dht11Temp << "℃" << "，湿度：" << dht11Wet << "%" << endl;
 	tftWriteImage(img);
 }
 
@@ -325,13 +407,14 @@ void tftWriteImage(string filename)
 
 void tftInit()
 {
-	tFields.insert(pair<string, TFT_field*>("Title", new TFT_field(tft, 5, 1, 118, 16, Color565(255, 255, 255), 1, TFT_BLACK, false)));
+	tFields.insert(pair<string, TFT_field*>("Title", new TFT_field(tft, 5, 0, 118, 16, Color565(255, 255, 255), 1, TFT_BLACK, false)));
 	tFields.insert(pair<string, TFT_field*>("Line1", new TFT_field(tft, 5, 68, 118, 16, Color565(255, 255, 255), 1, TFT_BLACK, false)));
 	tFields.insert(pair<string, TFT_field*>("Line2", new TFT_field(tft, 5, 96, 118, 16, Color565(255, 255, 255), 1, TFT_BLACK, false)));
+	tFields.insert(pair<string, TFT_field*>("DHTData", new TFT_field(tft, 5, 124, 118, 16, Color565(255, 255, 255), 1, TFT_BLACK, false)));
 	tManager.add(tFields["Title"]);
 	tManager.add(tFields["Line1"]);
 	tManager.add(tFields["Line2"]);
-	wiringPiSetupGpio();
+	tManager.add(tFields["DHTData"]);
 	tft.commonInit();
 	tft.initR();
 	tft.setRotation(DEGREE_180);
@@ -340,6 +423,7 @@ void tftInit()
 	(*(tFields["Title"])).setValue("  Location Test");
 	(*(tFields["Line1"])).setValue("Init test text...");
 	(*(tFields["Line2"])).setValue("Init test text 2...");
+	(*(tFields["DHTData"])).setValue("DHT Data Init...");
 	tManager.refresh();
 }
 /*

@@ -1,3 +1,8 @@
+#ifndef CMDLINE_H
+
+#define CMDLINE_H
+
+
 /*
 Copyright (c) 2009, Hideyuki Tanaka
 All rights reserved.
@@ -807,3 +812,5 @@ namespace cmdline {
 	};
 
 } // cmdline
+
+#endif // !CMDLINE_H

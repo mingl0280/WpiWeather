@@ -8,13 +8,13 @@ BINARYDIR := Release
 PREPROCESSOR_MACROS := NDEBUG=1 RELEASE=1
 INCLUDE_DIRS := E:/SysGCC/Raspberry/arm-linux-gnueabihf/sysroot/usr/include/libxml2
 LIBRARY_DIRS := 
-LIBRARY_NAMES := wiringPi tft_st7735 curl xml2 ssl png
+LIBRARY_NAMES := wiringPi tft_st7735 curl xml2 ssl png pthread
 ADDITIONAL_LINKER_INPUTS := 
 MACOS_FRAMEWORKS := 
 LINUX_PACKAGES := 
 
 CFLAGS := -ggdb -ffunction-sections -O3
-CXXFLAGS := -ggdb -ffunction-sections -fexceptions -O3
+CXXFLAGS := -ggdb -ffunction-sections -fexceptions -O3 -std=c++11
 ASFLAGS := 
 LDFLAGS := -Wl,-gc-sections
 COMMONFLAGS := 

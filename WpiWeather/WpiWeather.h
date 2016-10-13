@@ -23,6 +23,7 @@
 #include <wiringPiSPI.h>
 #include <png.h>
 #include "cmdline.h"
+#include "dht11.h"
 #define PNG_FILE_OPEN_ERR 400
 #define PNG_STRUCT_CREATE_ERR 402
 #define PNG_GET_INFO_ERR 404
@@ -147,5 +148,7 @@ map<string, TFT_field*> tFields;
 map<int, string> iconMap;
 
 string processer = "";
+
+DHT11Reader DHT11;
 
 #endif // !_WPIWEATHER_H
